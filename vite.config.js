@@ -6,6 +6,7 @@ export default defineConfig({
 
   server: {
     host: '0.0.0.0',
+    allowedHosts: ['sleepoutside-main-pzz9.onrender.com'],
     port: Number(process.env.PORT) || 5173,
     strictPort: true,
   },
