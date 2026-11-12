@@ -9,6 +9,7 @@ const productList = new ProductList(
   'tents',
   dataSource,
   document.querySelector('.product-list'),
-);
+); 
+
 
 productList.init();
