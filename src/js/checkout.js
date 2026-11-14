@@ -1,5 +1,7 @@
 import CheckoutProcess from './CheckoutProcess.mjs';
-import { updateCartCount } from './utils.mjs';
+import { loadHeaderFooter, updateCartCount } from './utils.mjs';
+
+loadHeaderFooter();
 
 const checkout = new CheckoutProcess('so-cart', '.checkout-summary');
 const form = document.querySelector('#checkout-form');

@@ -22,6 +22,47 @@ export function renderListWithTemplate(
   parentElement.insertAdjacentHTML(position, html);
 }
 
+export function renderWithTemplate(template, parentElement, data, callback) {
+  if (!parentElement) {
+    return;
+  }
+
+  parentElement.innerHTML = template;
+
+  if (callback) {
+    callback(data);
+  }
+}
+
+export async function loadTemplate(path) {
+  const response = await fetch(path);
+
+  if (!response.ok) {
+    throw new Error(`Failed to load template: ${path}`);
+  }
+
+  return response.text();
+}
+
+export async function loadHeaderFooter() {
+  const headerElement = document.querySelector('#main-header');
+  const footerElement = document.querySelector('#main-footer');
+
+  if (!headerElement && !footerElement) {
+    return;
+  }
+
+  if (headerElement) {
+    const headerTemplate = await loadTemplate('/partials/header.html');
+    renderWithTemplate(headerTemplate, headerElement, null, updateCartCount);
+  }
+
+  if (footerElement) {
+    const footerTemplate = await loadTemplate('/partials/footer.html');
+    renderWithTemplate(footerTemplate, footerElement);
+  }
+}
+
 // or a more concise version if you are into that sort of thing:
 // export const qs = (selector, parent = document) => parent.querySelector(selector);
 

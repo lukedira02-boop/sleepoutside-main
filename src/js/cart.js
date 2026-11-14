@@ -1,5 +1,6 @@
-import { getCartItems, updateCartCount } from './utils.mjs';
+import { getCartItems, loadHeaderFooter, updateCartCount } from './utils.mjs';
 
+loadHeaderFooter();
 updateCartCount();
 
 function renderCartContents() {
