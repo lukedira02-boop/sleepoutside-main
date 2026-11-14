@@ -10,16 +10,15 @@
 
   <body>
     <header id="main-header" class="divider"></header>
-    <main class="divider">
-      <div class="hero">
+    <main class="home-page">
+      <section class="hero" aria-label="Sleep Outside hero banner">
         <img
-          src="images/banner-sm.jpg"
-          srcset="images/banner-sm.jpg 500w, images/banner.jpg"
-          alt="image of a high mountain lake"
+          src="images/banner.jpg"
+          alt="High mountain lake in the morning"
         />
-        <div class="logo logo--square">
-          <img src="images/noun_Tent_2517.svg" alt="tent image for logo" />
-          <div>Sleep<span class="highlight">Outside</span></div>
+        <div class="hero__content">
+          <p class="eyebrow">Your next adventure starts here</p>
+          <h1>Sleep Outside</h1>
         </div>
         <div class="mission">
           <p>
@@ -27,19 +26,47 @@
             outside comfortably at an affordable price.
           </p>
         </div>
-      </div>
+      </section>
 
-      <section class="products">
-        <h2>Top Products</h2>
-        <p id="productListStatus" class="status" role="status">
-          Loading products...
-        </p>
-        <ul
-          class="product-list"
-          data-product-ids="880RR,985RF,985PR,344YJ"
-          aria-live="polite"
-        >
-        </ul>
+      <section class="categories" aria-label="Shop by category">
+        <div class="section-heading">
+          <p class="section-kicker">Shop by category</p>
+          <h2>Gear for every adventure</h2>
+        </div>
+
+        <div class="category-grid">
+          <a class="category-card" href="#" aria-label="Shop backpacks">
+            <img src="images/category-backpacks.svg" alt="Backpack icon" />
+            <div class="category-card__content">
+              <h3>Backpacks</h3>
+              <p>Pack smarter for day hikes and weekend escapes.</p>
+            </div>
+          </a>
+
+          <a class="category-card" href="#" aria-label="Shop tents">
+            <img src="images/category-tents.svg" alt="Tent icon" />
+            <div class="category-card__content">
+              <h3>Tents</h3>
+              <p>Reliable shelter built for mountain mornings and starry nights.</p>
+            </div>
+          </a>
+
+          <a class="category-card" href="#" aria-label="Shop sleeping bags">
+            <img src="images/category-sleepingbags.svg" alt="Sleeping bag icon" />
+            <div class="category-card__content">
+              <h3>Sleeping bags</h3>
+              <p>Warm, breathable comfort for every overnight adventure.</p>
+            </div>
+          </a>
+
+          <a class="category-card" href="#" aria-label="Shop hammocks">
+            <img src="images/category-hammocks.svg" alt="Hammock icon" />
+            <div class="category-card__content">
+              <h3>Hammocks</h3>
+              <p>Lightweight relaxation for laid-back hangouts and camps.</p>
+            </div>
+          </a>
+        </div>
       </section>
     </main>
     <footer id="main-footer"></footer>

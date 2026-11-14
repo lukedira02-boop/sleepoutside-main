@@ -23,6 +23,10 @@ export default class ProductList {
   }
 
   async init() {
+    if (!this.listElement) {
+      return;
+    }
+
     try {
       const products = await this.dataSource.getData();
       const availableIds = this.listElement.dataset.productIds
@@ -33,13 +37,17 @@ export default class ProductList {
         : products;
 
       this.renderList(displayProducts);
-      this.statusElement.textContent = displayProducts.length
-        ? ''
-        : 'No products are available right now.';
+      if (this.statusElement) {
+        this.statusElement.textContent = displayProducts.length
+          ? ''
+          : 'No products are available right now.';
+      }
     } catch (error) {
       console.error(`Unable to load ${this.category} products.`, error);
-      this.statusElement.textContent =
-        'We could not load products. Please try again later.';
+      if (this.statusElement) {
+        this.statusElement.textContent =
+          'We could not load products. Please try again later.';
+      }
     }
   }
 
