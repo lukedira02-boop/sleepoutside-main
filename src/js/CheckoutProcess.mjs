@@ -35,17 +35,21 @@ export default class CheckoutProcess {
 
   init() {
     const storedItems = getLocalStorage(this.key);
-    this.list = Array.isArray(storedItems)
-      ? storedItems
-      : storedItems
-        ? [storedItems]
-        : [];
+    this.list = Array.isArray(storedItems) ? storedItems : [];
     this.calculateItemSubTotal();
 
     if (this.list.length === 0) {
-      document.querySelector('#checkout-message').textContent =
-        'Your cart is empty. Add an item before checking out.';
-      document.querySelector('#checkout-submit').disabled = true;
+      const checkoutMessage = document.querySelector('#checkout-message');
+      const submitButton = document.querySelector('#checkout-submit');
+
+      if (checkoutMessage) {
+        checkoutMessage.textContent =
+          'Your cart is empty. Add an item before checking out.';
+      }
+
+      if (submitButton) {
+        submitButton.disabled = true;
+      }
     }
   }
 

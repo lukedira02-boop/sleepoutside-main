@@ -68,14 +68,26 @@ export async function loadHeaderFooter() {
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
+  try {
+    const storedValue = localStorage.getItem(key);
+    if (storedValue === null) {
+      return [];
+    }
+    return JSON.parse(storedValue);
+  } catch (error) {
+    console.warn(`Unable to parse localStorage key "${key}".`, error);
+    return [];
+  }
 }
 export function getCartItems() {
   const cartItems = getLocalStorage('so-cart');
   if (Array.isArray(cartItems)) {
     return cartItems;
   }
-  return cartItems ? [cartItems] : [];
+  if (cartItems && typeof cartItems === 'object') {
+    return [cartItems];
+  }
+  return [];
 }
 export function updateCartCount() {
   const cartItems = getCartItems();

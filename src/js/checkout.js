@@ -12,27 +12,47 @@ const message = document.querySelector('#checkout-message');
 checkout.init();
 updateCartCount();
 
-zipInput.addEventListener('change', () => {
-  if (zipInput.value.trim()) {
+if (zipInput) {
+  zipInput.addEventListener('change', () => {
+    if (zipInput.value.trim()) {
+      checkout.calculateOrderTotal();
+    } else {
+      checkout.resetOrderTotals();
+    }
+  });
+}
+
+if (form) {
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
     checkout.calculateOrderTotal();
-  } else {
-    checkout.resetOrderTotals();
-  }
-});
+    if (submitButton) {
+      submitButton.disabled = true;
+    }
+    if (message) {
+      message.textContent = 'Submitting your order...';
+    }
 
-form.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  checkout.calculateOrderTotal();
-  submitButton.disabled = true;
-  message.textContent = 'Submitting your order...';
-
-  try {
-    await checkout.checkout(form);
-    localStorage.removeItem('so-cart');
-    updateCartCount();
-    message.textContent = 'Your order was submitted successfully.';
-  } catch (error) {
-    message.textContent = `Unable to submit your order: ${error.message}`;
-    submitButton.disabled = false;
-  }
-});
+    try {
+      await checkout.checkout(form);
+      localStorage.removeItem('so-cart');
+      updateCartCount();
+      if (message) {
+        message.textContent = 'Your order was submitted successfully.';
+      }
+    } catch (error) {
+      if (message) {
+        message.textContent = `Unable to submit your order: ${error.message}`;
+      }
+      if (submitButton) {
+        submitButton.disabled = false;
+      }
+    }
+  });
+}
